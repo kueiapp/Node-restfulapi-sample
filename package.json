@@ -1,0 +1,26 @@
+{
+  "name": "javascript-node-express-restfull-api",
+  "version": "1.0.0",
+  "description": "Sample code for building up Restfull API using node-express and JavaScript",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "node-dev -r esm ./dist/index.js",
+    "dev": "nodemon ./src_js/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "node"
+  ],
+  "author": "kueiapp.com",
+  "license": "ISC",
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "body-parse": "0.1.0",
+    "express": "4.17.1",
+    "mysql": "^2.17.1"
+  }
+}
