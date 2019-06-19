@@ -10,3 +10,8 @@ Build a RESTful API sample using Node.js in JavaScript and MySQL
 * the test script uses package node-dev to watch the code continoualy in modification, and package esm to compile ES6 JavaScript
 > npm run dev
 * or you can run the code once using node or nodemon
+------------
+References
+------------
+1. https://ithelp.ithome.com.tw/articles/10195687
+2. https://iandays.com/2018/10/11/nodejsapi/index.html
