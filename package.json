@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "node-dev -r esm ./src_js/index.js",
-    "dev": "nodemon ./src_js/index.js"
+    "dev": "nodemon -r esm ./src_js/index.js"
   },
   "keywords": [
     "javascript",
@@ -14,15 +14,15 @@
   "author": "kueiapp.com",
   "license": "GNU",
   "devDependencies": {
-    "esm": "^3.2.25",
-    "fetch": "^1.1.0",
-    "node-dev": "^4.0.0",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^1.19.1"
+    "esm": "3.2.25",
+    "fetch": "1.1.0",
+    "node-dev": "4.0.0",
+    "node-fetch": "2.6.0",
+    "nodemon": "1.19.1"
   },
   "dependencies": {
     "body-parse": "0.1.0",
     "express": "4.17.1",
-    "mysql": "^2.17.1"
+    "mysql": "2.17.1"
   }
 }

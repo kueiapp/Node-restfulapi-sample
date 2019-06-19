@@ -4,6 +4,7 @@
 // ES6
 import setting from '../config/setting.js'
 import db from './db.module.js';
+import {SqlError} from '../config/ErrorHandler.js'
 
 const insertArticle = function(insertValues)
 {
@@ -19,7 +20,7 @@ const insertArticle = function(insertValues)
         connection.query('INSERT INTO news_list SET ?',[insertValues], function(error, result)
         {
           if (error) {
-            console.error('SQL error: ', error);
+            console.error('SQL error: ', new SqlError('Hey! I cannot insert the data').message );
             reject(error);
           }
           else if (result.affectedRows === 1) {
@@ -47,7 +48,7 @@ const selectArticle = function()
         connection.query( `SELECT * FROM news_list`, function(error, result)
         {
             if (error) {
-              console.error('SQL error: ', error);
+              console.error('SQL error: ', new SqlError('Hey! I cannot get data').message );
               reject(error);
             }
             else {
@@ -76,7 +77,7 @@ const modifyArticle = function(insertValues, aid)
         connection.query(`UPDATE news_list SET ? WHERE id = ?`,[insertValues,aid], function(error, result)
         {
           if (error) {
-            console.error('SQL error: ', error);
+            console.error('SQL error: ', new SqlError('Hey! I cannot update the data').message );
             reject(error);
           }
           else if (result.affectedRows === 0) { // no data
@@ -110,7 +111,7 @@ const deleteArticle = function(aid)
         connection.query(`DELETE FROM news_list WHERE id = '${aid}'`, function(error, result)
         {
           if (error) {
-            console.error('SQL error: ', error);
+            console.error('SQL error: ', new SqlError('Hey! I cannot delete the data').message );
             reject(error);
           }
           else if (result.affectedRows === 1) {

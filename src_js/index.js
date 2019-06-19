@@ -4,5 +4,5 @@
 */
 
 
-const app = require('./config/app.js');
+const app = require('./app.js');
 

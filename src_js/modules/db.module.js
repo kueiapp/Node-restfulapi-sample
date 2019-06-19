@@ -4,6 +4,7 @@
 // ES6
 import * as mysql from 'mysql';
 import setting from '../config/setting.js'
+import {SqlError} from '../config/ErrorHandler.js'
 
 // create a connection
 const connectionPool = mysql.createPool({
@@ -17,7 +18,7 @@ const connectionPool = mysql.createPool({
 connectionPool.getConnection(function(err, connection)
 {
   if (err) {
-    console.log('mysql connetion failed！');
+    console.error( new SqlError('OH NO! connecting to SQL failed!').message );
   }
   else {
     console.log('mysql connection ready..');

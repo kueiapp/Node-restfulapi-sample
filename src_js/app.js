@@ -2,7 +2,7 @@
 *
 */
 // ES6
-import setting from './setting.js';
+import setting from './config/setting.js';
 
 // ES5
 const express = require('express');
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   res.send(`on http://127.0.0.1:${setting.config.port} (${setting.config.env})`);
 });
 
-import APIROUTE from '../routes/api.route.js';
+import APIROUTE from './routes/api.route.js';
 app.use('/api', APIROUTE);
 
 

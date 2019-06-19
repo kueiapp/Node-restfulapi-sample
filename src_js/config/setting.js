@@ -14,8 +14,8 @@ const db = {
  "MYSQL_HOST" : "localhost",
  "MYSQL_PORT" : 3306,
  "MYSQL_USER" : "root",
- "MYSQL_PASS" : "1234",
- "MYSQL_DATABASE" : "lifelab_nhk"
+ "MYSQL_PASS" : "wrong_pw",
+ "MYSQL_DATABASE" : "wrong_db_name"
 }
 
 // ES6
