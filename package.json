@@ -16,7 +16,7 @@
   "devDependencies": {
     "esm": "^3.2.25",
     "fetch": "^1.1.0",
-    "morgan": "^1.9.1",
+    "node-dev": "^4.0.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1"
   },
