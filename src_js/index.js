@@ -1,4 +1,5 @@
-/** main.ts
+/**
+* main entry
 * by kueiapp.com
 */
 

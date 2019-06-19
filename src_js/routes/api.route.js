@@ -14,7 +14,8 @@ const router = express.Router();
 * GET localhost:[port]/api page.
 * parent route is /api
 */
-router.get('/', (req, res) => {
+router.get('/', function(req, res)
+{
   res.send(`here is /api`);
 });
 

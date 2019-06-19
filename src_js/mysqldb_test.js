@@ -63,17 +63,20 @@ const MYSQL_PASS = "1234"
 const MYSQL_DATABASE = "lifelab_nhk"
 
 /** URI */
-app.get('/mysql',function(res,resp){
-  const connectionPool = mysql.createPool({ // 建立一個連線池
-    connectionLimit: 10, // 限制池子連線人數
-    host: MYSQL_HOST, // 主機名稱
-    user: MYSQL_USER, // 用戶名稱
-    password: MYSQL_PASS, // 資料庫密碼
-    database: MYSQL_DATABASE // 資料庫名稱
+app.get('/mysql',function(res,resp)
+{
+  // create a connection
+  const connectionPool = mysql.createPool({
+    connectionLimit: 10,
+    host: MYSQL_HOST,
+    user: MYSQL_USER,
+    password: MYSQL_PASS,
+    database: MYSQL_DATABASE
   });
 
   var resp2 = resp;
-  connectionPool.getConnection((err, connection) => { //建立一個連線若錯誤回傳err
+  // arrow function is acceptable
+  connectionPool.getConnection((err, connection) => {
     if (err) {
       resp2.send(err);
       console.log('連線失敗！');
@@ -84,10 +87,3 @@ app.get('/mysql',function(res,resp){
     }
   });
 });
-
-// app.get('/books',apis.findAll);
-// app.get('/books/:id',apis.findByID);
-// app.post('/books',apis.post);
-// app.put('/books/:id',apis.updates);
-// app.del('/books/:id',apis.removeByID);
-

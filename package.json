@@ -4,7 +4,7 @@
   "description": "Sample code for building up Restfull API using node-express and JavaScript",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "node-dev -r esm ./dist/index.js",
+    "test": "node-dev -r esm ./src_js/index.js",
     "dev": "nodemon ./src_js/index.js"
   },
   "keywords": [
@@ -12,10 +12,12 @@
     "node"
   ],
   "author": "kueiapp.com",
-  "license": "ISC",
+  "license": "GNU",
   "devDependencies": {
     "esm": "^3.2.25",
+    "fetch": "^1.1.0",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1"
   },
   "dependencies": {

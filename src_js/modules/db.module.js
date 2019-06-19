@@ -5,20 +5,22 @@
 import * as mysql from 'mysql';
 import setting from '../config/setting.js'
 
-const connectionPool = mysql.createPool({ // 建立一個連線池
-  connectionLimit: 10, // 限制池子連線人數
-  host: setting.db.MYSQL_HOST, // 主機名稱
-  user: setting.db.MYSQL_USER, // 用戶名稱
-  password: setting.db.MYSQL_PASS, // 資料庫密碼
-  database: setting.db.MYSQL_DATABASE // 資料庫名稱
+// create a connection
+const connectionPool = mysql.createPool({
+  connectionLimit: 10,
+  host: setting.db.MYSQL_HOST,
+  user: setting.db.MYSQL_USER,
+  password: setting.db.MYSQL_PASS,
+  database: setting.db.MYSQL_DATABASE
 });
 
-connectionPool.getConnection((err, connection) => { //建立一個連線若錯誤回傳err
+connectionPool.getConnection(function(err, connection)
+{
   if (err) {
-    console.log('連線失敗！');
+    console.log('mysql connetion failed！');
   }
   else {
-    console.log(connection);
+    console.log('mysql connection ready..');
   }
 });
 

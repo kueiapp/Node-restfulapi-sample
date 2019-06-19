@@ -1,20 +1,69 @@
 // article.controller.js
 import articleModule from '../modules/article.module';
 
-const articlePost = (req, res) => {
-
+const insertArticle = function(req, res)
+{
+  const insertValues = req.body;
+  console.log('insert an article:', JSON.stringify(insertValues) );
+  // POST /api/article
+  articleModule.insertArticle(insertValues)
+  .then(function(result)
+  {
+    res.send(result);
+  })
+  .catch(function(err)
+  {
+    return res.send(err);
+  });
 }
 
-/*  Article GET 取得  */
-const articleGet = (req, res) => {
-  articleModule.selectArticle().then((result) => {
-    res.send(result); // 成功回傳result結果
+const getArticle = function(req, res)
+{
+  // GET /api/article
+
+  articleModule.selectArticle()
+  .then(function(result)
+  {
+    res.send(result);
   })
-  .catch((err) => {
+  .catch(function(err)
+  {
     return res.send(err);
-  }); // 失敗回傳錯誤訊息
+  });
 };
 
+const updateArticle = function(req, res)
+{
+  // UPDATE /api/article/:article_id
+  const aid = req.params.article_id;
+  const insertValues = req.body;
+  console.log("update article id: "+ aid + ", value:" + JSON.stringify(insertValues) );
+
+  articleModule.modifyArticle(insertValues, aid)
+  .then(function(result) // promise resolved
+  {
+    res.send(result);
+  })
+  .catch(function(err) // promise reject
+  {
+    return res.send(err);
+  });
+};
+
+const deleteArticle = function(req,res)
+{
+  // DELETE /api/article/:article_id
+  const aid = req.params.article_id;
+  console.log("delete article: "+ aid);
+
+  articleModule.deleteArticle(aid)
+  .then(function(result)
+  {
+    res.send(result);
+  })
+  .catch((err) => { return res.send('Error:'+err); });
+}
+
 export default {
-  articleGet,articlePost
+  getArticle,insertArticle,updateArticle,deleteArticle
 };

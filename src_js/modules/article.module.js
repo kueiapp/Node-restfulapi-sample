@@ -5,36 +5,129 @@
 import setting from '../config/setting.js'
 import db from './db.module.js';
 
-const insertArticle = () => {
-
-};
-
-/*  Article GET 取得  */
-const selectArticle = () => {
-  return new Promise((resolve, reject) => {
-    db.getConnection((connectionError, connection) => { // 資料庫連線
+const insertArticle = function(insertValues)
+{
+  return new Promise(function(resolve, reject)
+  {
+    db.getConnection(function(connectionError, connection)
+    {
       if (connectionError) {
-        reject(connectionError); // 若連線有問題回傳錯誤
+        console.error('connection error: ', connectionError);
+        reject(connectionError);
       }
       else {
-        connection.query( // Article撈取所有欄位的值組
-          `SELECT * FROM news_list`
-          , (error, result) => {
-            if (error) {
-              console.error('SQL error: ', error);
-              reject(error); // 寫入資料庫有問題時回傳錯誤
-            }
-            else {
-              resolve(result); // 撈取成功回傳 JSON 資料
-            }
-            connection.release();
+        connection.query('INSERT INTO news_list SET ?',[insertValues], function(error, result)
+        {
+          if (error) {
+            console.error('SQL error: ', error);
+            reject(error);
           }
-        );
+          else if (result.affectedRows === 1) {
+            resolve(`Insert successfully！`);
+          }
+
+          // release memory
+          connection.release();
+        });
       }
     });
   });
 };
 
+const selectArticle = function()
+{
+  return new Promise((resolve, reject) => {
+    db.getConnection(function(connectionError, connection)
+    {
+      if (connectionError) {
+        console.error('connection error: ', connectionError);
+        reject('err:',connectionError);
+      }
+      else {
+        connection.query( `SELECT * FROM news_list`, function(error, result)
+        {
+            if (error) {
+              console.error('SQL error: ', error);
+              reject(error);
+            }
+            else {
+              resolve(result);
+            }
+
+            // release memory
+            connection.release();
+        });
+      }
+    });
+  });
+};
+
+const modifyArticle = function(insertValues, aid)
+{
+  return new Promise( function(resolve, reject)
+  {
+    db.getConnection(function(connectionError, connection)
+    {
+      if (connectionError) {
+        console.error('connection error: ', connectionError);
+        reject('err:',connectionError);
+      }
+      else {
+        connection.query(`UPDATE news_list SET ? WHERE id = ?`,[insertValues,aid], function(error, result)
+        {
+          if (error) {
+            console.error('SQL error: ', error);
+            reject(error);
+          }
+          else if (result.affectedRows === 0) { // no data
+            resolve('No such data');
+          }
+          else if (result.message.match('Changed: 1')) {
+            resolve('Done..');
+          }
+          else {
+            resolve('Nothing changed..');
+          }
+
+          connection.release();
+        });
+      }
+    });
+  });
+};
+
+const deleteArticle = function(aid)
+{
+  return new Promise(function(resolve, reject)
+  {
+    db.getConnection(function(connectionError, connection)
+    {
+      if (connectionError) {
+        console.error('connection error: ', connectionError);
+        reject(connectionError);
+      }
+      else {
+        connection.query(`DELETE FROM news_list WHERE id = '${aid}'`, function(error, result)
+        {
+          if (error) {
+            console.error('SQL error: ', error);
+            reject(error);
+          }
+          else if (result.affectedRows === 1) {
+            resolve('deleted！');
+          }
+          else {
+            resolve('delete failed！');
+          }
+
+          connection.release();
+        });
+      }
+    });
+  });
+}
+
+
 export default {
-  selectArticle,insertArticle
+  selectArticle, insertArticle, modifyArticle, deleteArticle
 };
